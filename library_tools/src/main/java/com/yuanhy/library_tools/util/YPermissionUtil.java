@@ -57,7 +57,7 @@ import java.util.List;
  Manifest.permission.READ_EXTERNAL_STORAGE,
  Manifest.permission.WRITE_EXTERNAL_STORAGE
  */
-public class XPermission {
+public class YPermissionUtil {
 
     private static int mRequestCode = -1;
 

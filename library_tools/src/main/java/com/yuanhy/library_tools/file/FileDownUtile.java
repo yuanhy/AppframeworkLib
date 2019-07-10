@@ -55,6 +55,7 @@ public class FileDownUtile {
 
         AndroidOkHttp3 androidOkHttp3 = AndroidOkHttp3.getInstance(context);
         androidOkHttp3.initFileClient();
+        //获取文件的长度
         androidOkHttp3.getContentLength(url, new YCallBack() {
             @Override
             public void onError(Object o) {
@@ -66,11 +67,11 @@ public class FileDownUtile {
                 HashMap<String, Long> hashMap = new HashMap<>();
                 long contentlength = (long) o;
                 long length = (contentlength / multithreadnubs);
-                if (contentlength > 0) {
-                    for (int i = 0; i < multithreadnubs; i++) {
+                if (contentlength > 0) {//获取到正确的文件长度
+                    for (int i = 0; i < multithreadnubs; i++) {//线程分割
                         long start = length * i;
                         long end = length * i + length - 1;
-                        if (i == multithreadnubs - 1) {
+                        if (i == multithreadnubs - 1) {//最后一条线程要特别处理
                             start = length * i;
                             end = contentlength - 1;
                         }

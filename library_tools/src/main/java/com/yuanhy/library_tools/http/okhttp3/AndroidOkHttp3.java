@@ -147,8 +147,8 @@ public class AndroidOkHttp3 implements Http {
 
         msslClient = builder.cache(cache)
 
-                .sslSocketFactory(createSSLSocketFactory(), mMyTrustManager)
-                .hostnameVerifier(new TrustAllHostnameVerifier())
+                .sslSocketFactory(createSSLSocketFactory(),getTrustManager() )
+                .hostnameVerifier(getHostnameVerifier())
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(60 * 2, TimeUnit.SECONDS).build();
 
@@ -178,8 +178,8 @@ public class AndroidOkHttp3 implements Http {
         builder.addInterceptor(interceptor);
 //==========================
         msslClient = builder
-                .sslSocketFactory(createSSLSocketFactory(), mMyTrustManager)
-                .hostnameVerifier(new TrustAllHostnameVerifier())
+                .sslSocketFactory(createSSLSocketFactory(), getTrustManager())
+                .hostnameVerifier(getHostnameVerifier())
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS).build();
     }
@@ -604,12 +604,12 @@ public class AndroidOkHttp3 implements Http {
                  * 本地文件已下载的大小
                  */
                 long them = SharedPreferencesUtil.getSharedPreferencesUtil(mContext).getLong(dataKey);
-                AppFramentUtil.logCatUtil.e(TAG, "datakey:"+dataKey+"  downSiz:"+them);
+                AppFramentUtil.logCatUtil.e(TAG, "datakey:" + dataKey + "  downSiz:" + them);
 
-                if (them ==contentLength-startIndex) {
-                    progressListener.onProgress(total, them, dataKey, threadId ,isOk);
+                if (them == contentLength - startIndex) {
+                    progressListener.onProgress(total, them, dataKey, threadId, isOk);
                     return;
-                }else {
+                } else {
                     seekStart = seekStart + them;
                 }
 
@@ -623,16 +623,16 @@ public class AndroidOkHttp3 implements Http {
                         sum += len;
                         downSizi = sum;
                         progressListener.onProgress(total, sum, isOk);
-                        progressListener.onProgress(total, sum, dataKey,threadId ,isOk);
+                        progressListener.onProgress(total, sum, dataKey, threadId, isOk);
                     }
                     isOk = true;
-                    progressListener.onProgress(total, sum, dataKey,threadId , isOk);
+                    progressListener.onProgress(total, sum, dataKey, threadId, isOk);
                     progressListener.onProgress(total, sum, isOk);
                     AppFramentUtil.logCatUtil.i(TAG, file.getAbsolutePath());
                 } catch (Exception e) {
                     e.printStackTrace();
                     SharedPreferencesUtil.getSharedPreferencesUtil(mContext).putLong(dataKey, downSizi);
-                    AppFramentUtil.logCatUtil.e(TAG, "datakey:"+dataKey+"  downSiz:"+downSizi+"/n/r"+e.getStackTrace().toString());
+                    AppFramentUtil.logCatUtil.e(TAG, "datakey:" + dataKey + "  downSiz:" + downSizi + "/n/r" + e.getStackTrace().toString());
                 } finally {
                     try {
                         if (inputStream != null)
@@ -657,19 +657,19 @@ public class AndroidOkHttp3 implements Http {
     }
 
     @Override
-    public long getContentLength(String url,YCallBack callBack) {
+    public long getContentLength(String url, YCallBack callBack) {
         Request request = new Request.Builder()
                 .url(url).build();
         mFileClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                callBack .onError(e.getStackTrace());
+                callBack.onError(e.getStackTrace());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-            long      lenth =response.body().contentLength();
-                callBack .onOk(lenth );
+                long lenth = response.body().contentLength();
+                callBack.onOk(lenth);
             }
         });
         return 0;
@@ -773,11 +773,45 @@ public class AndroidOkHttp3 implements Http {
 
 
     private MyTrustManager mMyTrustManager;
+    private SSLSocketFactory sslSocketFactory;
+    private TrustAllHostnameVerifier hostnameVerifier;
+
+    public SSLSocketFactory getSSLSocketFactory() {
+        if (sslSocketFactory == null) {
+            synchronized (AndroidOkHttp3.class) {
+                sslSocketFactory = createSSLSocketFactory();
+            }
+        }
+        return sslSocketFactory;
+    }
+
+    public TrustAllHostnameVerifier getHostnameVerifier() {
+        if (hostnameVerifier == null) {
+            synchronized (AndroidOkHttp3.class) {
+                hostnameVerifier = new TrustAllHostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                };
+            }
+        }
+        return hostnameVerifier;
+    }
+
+    public MyTrustManager getTrustManager() {
+        if (mMyTrustManager == null) {
+            synchronized (AndroidOkHttp3.class) {
+                mMyTrustManager = new MyTrustManager();
+            }
+        }
+        return mMyTrustManager;
+    }
 
     private SSLSocketFactory createSSLSocketFactory() {
         SSLSocketFactory ssfFactory = null;
         try {
-            mMyTrustManager = new MyTrustManager();
+            mMyTrustManager = getTrustManager();
             SSLContext sc = SSLContext.getInstance("TLS");
             sc.init(null, new TrustManager[]{mMyTrustManager}, new SecureRandom());
             ssfFactory = sc.getSocketFactory();
@@ -817,6 +851,7 @@ public class AndroidOkHttp3 implements Http {
             return true;
         }
     }
+
 
     @Override
     public byte[] getAsBytes(String url) throws IOException {
