@@ -97,7 +97,7 @@ public class SharedPreferencesUtil {
     public String getString(String key) {
         //获取sharedPreferences对象
         SharedPreferences sharedPreferences = context.getSharedPreferences(appSavaData, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(key, "true");
+        return sharedPreferences.getString(key, "");
     }
 
 
