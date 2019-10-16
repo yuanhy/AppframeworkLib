@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#44000000"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_100"
+    android:paddingLeft="@dimen/dp_47"
+    android:paddingRight="@dimen/dp_47"
+    android:paddingTop="@dimen/dp_100">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_167"
+        android:background="@drawable/head_new_version_background">
+
+        <RelativeLayout
+            android:id="@+id/iv_cancle_lout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_66"
+            android:padding="@dimen/dp_10">
+
+            <ImageView
+                android:id="@+id/iv_cancle_img"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_12"
+                android:src="@drawable/close_update_new" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_desc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="发现新版本"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/dp_20" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_28"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_desc2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18"
+                android:text="好介绍的客户放假开始的好红酒可上单很纠结啊上课就付款了时间可能会觉得可能暑假很快乐大家快来喝酒人是短款那就好看你家啊烧烤喝酒啊看了就看了"
+                android:textColor="@color/color_000000"
+                android:textSize="@dimen/sp_16" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/iv_now_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_17"
+            android:layout_marginLeft="@dimen/dp_18"
+            android:layout_marginRight="@dimen/dp_18"
+            android:background="@drawable/out_shool_parent_bj"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp_13"
+            android:paddingTop="@dimen/dp_13"
+            android:text="立即升级"
+            android:textColor="@color/color_ffffff"
+
+            android:textSize="@dimen/dp_16" />
+    </LinearLayout>
+
+
+</LinearLayout>

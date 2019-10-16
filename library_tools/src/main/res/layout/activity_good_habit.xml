@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   android:fitsSystemWindows="true">
+    <include layout="@layout/title_base_lout"></include>
+
+    <RelativeLayout
+        android:id="@+id/rl_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_below="@+id/title_line"
+       >
+
+        <TextView
+            android:id="@+id/tv_home_name"
+            android:layout_width="375px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="家"
+            android:textColor="@color/theme_color_bule"
+            android:textSize="@dimen/sp_18"
+            />
+
+        <TextView
+            android:id="@+id/tv_school_name"
+            android:layout_width="@dimen/dp_188"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/tv_home_name"
+            android:gravity="center"
+            android:text="校"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_18"
+            />
+
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/dp_2"
+            android:layout_marginTop="@dimen/dp_2"
+            android:background="#f2f2f2"
+          />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:layout_alignParentBottom="true"
+            android:background="#f2f2f2" />
+
+        <TextView
+            android:id="@+id/tv_select_line_home"
+            android:layout_width="@dimen/dp_188"
+            android:layout_height="@dimen/dp_2"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_color_bule"
+           />
+
+        <TextView
+            android:id="@+id/tv_select_line_school"
+            android:layout_width="@dimen/dp_188"
+            android:layout_height="@dimen/dp_2"
+            android:layout_alignLeft="@+id/tv_school_name"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_color_bule"
+            android:visibility="invisible"
+           />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_selector"></FrameLayout>
+
+    <include layout="@layout/nochild_hint_view"></include>
+</LinearLayout>

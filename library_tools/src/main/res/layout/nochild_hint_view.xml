@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_unbindchild"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/iv_unbindchild"
+        android:layout_width="@dimen/dp_104"
+        android:layout_height="@dimen/dp_104"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/blankpage"
+          />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_unbindchild"
+        android:layout_centerHorizontal="true"
+        android:text="还没有内容哦~请添加孩子信息"
+        android:textColor="#bfbfbf"
+        android:textSize="@dimen/sp_15"
+       />
+</RelativeLayout>
