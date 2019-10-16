@@ -11,9 +11,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class StatusBarUtil {
-    String titleCole="#1B8AD1";
-    public void setTitleCole(String titleCole){
-        this.titleCole=titleCole;
+    String titleBarCole="#1B8AD1";
+    public void setTitleBarCole(String titleCole){
+        this.titleBarCole=titleCole;
     };
     /**
      * true 黑色字体，白色背景
@@ -35,7 +35,7 @@ public class StatusBarUtil {
                     activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
                 } else {
                     StatusbarColorUtils.setStatusBarDarkIcon(activity, false);  //参数 false 白色 true 黑色
-                    activity.getWindow().setStatusBarColor(Color.parseColor(titleCole));
+                    activity.getWindow().setStatusBarColor(Color.parseColor(titleBarCole));
                 }
             } else {
                 activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -58,14 +58,14 @@ public class StatusBarUtil {
                     activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
                 } else {
                     StatusbarColorUtils.setStatusBarDarkIcon(activity, false);  //参数 false 白色 true 黑色
-                    activity.getWindow().setStatusBarColor(Color.parseColor(titleCole));
+                    activity.getWindow().setStatusBarColor(Color.parseColor(titleBarCole));
                 }
             } else {
                 if (transparent) { //黑色字体
                     activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                     activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
                 } else {//白色字体
-                    activity.getWindow().setStatusBarColor(Color.parseColor(titleCole));
+                    activity.getWindow().setStatusBarColor(Color.parseColor(titleBarCole));
                     activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_VISIBLE);
                 }
@@ -153,7 +153,7 @@ public class StatusBarUtil {
                         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                         activity.getWindow().setNavigationBarColor(Color.TRANSPARENT);
                     } else {
-                        activity.getWindow().setStatusBarColor(Color.parseColor(titleCole));
+                        activity.getWindow().setStatusBarColor(Color.parseColor(titleBarCole));
                         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_VISIBLE);
                     }
                 }

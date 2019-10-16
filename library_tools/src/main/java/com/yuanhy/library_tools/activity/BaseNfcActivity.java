@@ -12,7 +12,6 @@ import android.nfc.tech.NfcB;
 import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.yuanhy.library_tools.util.SdCardUtil;
@@ -28,7 +27,7 @@ public class BaseNfcActivity extends Activity {
     public Context context;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         TAG = getClass().getName();

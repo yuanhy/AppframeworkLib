@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/login_button_pressed_shape" android:state_pressed="true"></item>
-    <item android:drawable="@drawable/login_button_enable_shape" android:state_enabled="true"></item>
-    <item android:drawable="@drawable/login_button_unenable_shape" android:state_enabled="false"></item>
-</selector>

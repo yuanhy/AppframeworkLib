@@ -1,21 +1,16 @@
 package com.yuanhy.library_tools.image;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.yuanhy.library_tools.R;
 import com.yuanhy.library_tools.app.AppFramentUtil;
 import com.yuanhy.library_tools.util.LogCatUtil;
 import com.yuanhy.library_tools.util.YCallBack;
 
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,15 +21,90 @@ import java.io.IOException;
 
 public class GlideUtil {
    private static  String TAG="GlideUtil";
-public static void setImage(Context context, String path, ImageView imageView){
-    CornerTransform transformation = new CornerTransform(context, dip2px(context, 10));
+
+
+    private static GlideUtil glideImageViewUtil;
+    private static RequestOptions options;
+    private static RequestOptions optionsUserIco;
+
+    private GlideUtil() {
+        options = new RequestOptions()
+                .placeholder(R.drawable.glidle_loadgif)
+                .error(R.drawable.icon_errorimg).skipMemoryCache(false)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        optionsUserIco = new RequestOptions()
+                .circleCropTransform()
+                .placeholder(R.drawable.login_head)
+                .error(R.drawable.login_head).skipMemoryCache(false)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+    }
+
+    public static GlideUtil getGlideImageViewUtil() {
+        if (glideImageViewUtil == null) {
+            glideImageViewUtil = new GlideUtil();
+        }
+        return glideImageViewUtil;
+    }
+
+    public void setUserIco(Context context, String urlpath, ImageView imageView) {
+        if (context == null)
+            return;
+        Glide.with(context).load(urlpath).apply(optionsUserIco).into(imageView);
+    }
+
+    public void setUserIco(Context context, int drawable, ImageView imageView) {
+
+        Glide.with(context).load(context.getResources().getDrawable(drawable)).apply(optionsUserIco).into(imageView);
+    }
+
+    public void setImageView(Context context, String urlpath, ImageView imageView) {
+        Glide.with(context).load(urlpath).apply(options).into(imageView);
+    }
+
+    public void setImageView(Context context, int drawable, ImageView imageView) {
+        Glide.with(context).load(context.getResources().getDrawable(drawable)).apply(options).into(imageView);
+
+    }
+
+    public void setGifImageView(Context context, String urlpath, ImageView imageView) {
+        Glide.with(context).asGif().load(urlpath).apply(options).into(imageView);
+    }
+
+
+    /**
+     * Gif播放完毕回调
+     */
+    public interface GifListener {
+        void gifPlayComplete();
+    }
+
+
+    //清除内存缓存
+    public void clearMemory(Context context) {
+        // 必须在UI线程中调用
+        Glide.get(context).clearMemory();
+    }
+
+    /**
+     * 绘制圆角图片
+     * @param context
+     * @param path
+     * @param imageView
+     * @param dpValue dp单位
+     * @param leftTop
+     * @param rightTop
+     * @param leftBottom
+     * @param rightBottom
+     */
+    public   void setImageTransform(Context context, String path, ImageView imageView, float dpValue,boolean leftTop, boolean rightTop, boolean leftBottom, boolean rightBottom){
+    CornerTransform transformation = new CornerTransform(context, dip2px(context, dpValue));
 //只是绘制左上角和右上角圆角
-    transformation.setExceptCorner(false, false, false, false);
+    transformation.setExceptCorner(leftTop, rightTop, leftBottom, rightBottom);
 
     Glide.with(context)
             .load(path)
-            .asBitmap()
-            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .skipMemoryCache(false)
             .placeholder(R.drawable.user_ico)
             .error(R.drawable.icon_errorimg)
             .transform(transformation)
@@ -52,37 +122,38 @@ public static void setImage(Context context, String path, ImageView imageView){
          * @param imgFileName 图片文件绝对地址
          */
     public static void savaImage(final Context context, String imgUrl, final String  imgFileName, final YCallBack callBack){
-        Glide.with(context).load(imgUrl).asBitmap().toBytes().into(new SimpleTarget<byte[]>() {
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                callBack.requestFail(false);
-                LogCatUtil.getInstance(context)
-                        .i("savaImage",  imgFileName+" 图片保存失败："+e.getMessage());
-                super.onLoadFailed(e, errorDrawable);
-            }
-
-            @Override
-            public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
-                try {
-                    if (bytes==null||bytes.length==0){
-                        callBack.requestFail(false);
-                        return;
-                    }
-                    boolean   isSuccess=   savaBitmap(imgFileName, bytes);
-                    if (isSuccess){
-                        callBack.requestSuccessful(isSuccess);
-                    }else {
-                        callBack.requestFail(isSuccess);
-                    }
-                } catch (Exception e) {
-                    callBack.requestFail(null);
-                    e.printStackTrace();
-                }
-            }
-        });
+//        File sourceFile = Glide.with(context).asFile().load(imgUrl).submit().get();
+//        Glide.with(context).load(imgUrl).asBitmap().toBytes().into(new SimpleTarget<byte[]>() {
+//            @Override
+//            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+//                callBack.requestFail(false);
+//                LogCatUtil.getInstance(context)
+//                        .i("savaImage",  imgFileName+" 图片保存失败："+e.getMessage());
+//                super.onLoadFailed(e, errorDrawable);
+//            }
+//
+//            @Override
+//            public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
+//                try {
+//                    if (bytes==null||bytes.length==0){
+//                        callBack.requestFail(false);
+//                        return;
+//                    }
+//                    boolean   isSuccess=   savaBitmap(imgFileName, bytes);
+//                    if (isSuccess){
+//                        callBack.requestSuccessful(isSuccess);
+//                    }else {
+//                        callBack.requestFail(isSuccess);
+//                    }
+//                } catch (Exception e) {
+//                    callBack.requestFail(null);
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
     // 保存图片到手机指定目录
-    private static boolean savaBitmap(String imgFileName, byte[] bytes) {
+    public static boolean savaBitmap(String imgFileName, byte[] bytes) {
         boolean   isSuccess = false;
         FileOutputStream fos = null;
         try {
@@ -119,33 +190,33 @@ public static void setImage(Context context, String path, ImageView imageView){
                   .i(TAG,  imgFileName+" 图片创建失败：");
           return;
       }
-        Glide.with(context).load(imgUrl).asBitmap().toBytes().into(new SimpleTarget<byte[]>() {
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                callBack.requestFail(false);
-                LogCatUtil.getInstance(context)
-                        .i("savaImage",  imgFileName+" 图片保存失败：");
-                super.onLoadFailed(e, errorDrawable);
-            }
-
-            @Override
-            public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
-                try {
-                    if (bytes==null||bytes.length==0){
-                        callBack.requestFail(false);
-                        return;
-                    }
-                    boolean   isSuccess=   savaBitmap(directoryPath+imgFileName, bytes);
-                    if (isSuccess){
-                        callBack.requestSuccessful(isSuccess);
-                    }else {
-                        callBack.requestFail(isSuccess);
-                    }
-                } catch (Exception e) {
-                    callBack.requestFail(null);
-                    e.printStackTrace();
-                }
-            }
-        });
+//        Glide.with(context).load(imgUrl).into(new SimpleTarget<byte[]>() {
+//            @Override
+//            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+//                callBack.requestFail(false);
+//                LogCatUtil.getInstance(context)
+//                        .i("savaImage",  imgFileName+" 图片保存失败：");
+//                super.onLoadFailed(e, errorDrawable);
+//            }
+//
+//            @Override
+//            public void onResourceReady(byte[] bytes, GlideAnimation<? super byte[]> glideAnimation) {
+//                try {
+//                    if (bytes==null||bytes.length==0){
+//                        callBack.requestFail(false);
+//                        return;
+//                    }
+//                    boolean   isSuccess=   savaBitmap(directoryPath+imgFileName, bytes);
+//                    if (isSuccess){
+//                        callBack.requestSuccessful(isSuccess);
+//                    }else {
+//                        callBack.requestFail(isSuccess);
+//                    }
+//                } catch (Exception e) {
+//                    callBack.requestFail(null);
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 }

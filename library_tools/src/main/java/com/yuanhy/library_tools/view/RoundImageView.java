@@ -11,12 +11,13 @@ import android.graphics.Xfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * 圆角图片
  */
-public class RoundImageView extends ImageView {
+public class RoundImageView extends AppCompatImageView {
 
 	private Paint mPaint;
 	private Xfermode mXfermode;
@@ -40,7 +41,8 @@ public class RoundImageView extends ImageView {
 	}
 
 	public void setRoundDp(Context context, int mBorderRadius) {
-		mBorderRadius = dip2px(context, mBorderRadius);
+		this.mBorderRadius = dip2px(context, mBorderRadius);
+		invalidate();
 	}
 
 	/**

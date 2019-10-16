@@ -1,7 +1,9 @@
 package com.yuanhy.library_tools.app;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.vector.update_app.UpdateAppBean;
 import com.vector.update_app.UpdateAppManager;
@@ -143,7 +145,7 @@ public class AppUpdataUtil {
                     protected void hasNewApp(UpdateAppBean updateApp, final UpdateAppManager updateAppManager) {
                         String time = SharedPreferencesUtil.getSharedPreferencesUtil(fragmentActivity)
                                 .getString(SharedPreferencesUtil.AppDataData);
-                        if (!updateApp.isConstraint() && !StringUtil.isNull(time)) {
+                        if (!updateApp.isConstraint() && !TextUtils.isEmpty(time)) {
                             if (time.equals(StringUtil.getDate()) && !isRemind) {
                                 return;
                             }

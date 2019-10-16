@@ -1,6 +1,7 @@
 package com.yuanhy.library_tools.http.okgo;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Progress;

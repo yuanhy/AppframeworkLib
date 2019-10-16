@@ -9,62 +9,6 @@
     <color name="color_dedede">#dedede</color>
     <color name="color_ffffff">#ffffff</color>
     <color name="color_161616">#161616</color>
-
-    <color name="color_f2f2f2">#f2f2f2</color>
-
-
-    <color name="color_0f9cf6">#0f9cf6</color>
-    <color name="color_999999">#999999</color>
-    <color name="color_bbbbbb">#bbbbbb</color>
-    <color name="color_e7e7e7">#e7e7e7</color>
-
-
-    <color name="gray_background">#f5f5f5</color>
-    <color name="white">#ffffff</color>
-    <color name="tv_secondcolor">#666666</color>
-    <color name="black">#000000</color>
-    <color name="type">#dadbda</color>
-    <color name="canlendar_text_color">#323232</color>
-    <color name="transparent">#00000000</color>
-    <color name="black_top">#1b1e26</color>
-    <color name="login_btn_text_color">#dedede</color>
-    <color name="btn_nomal1">#cc77a035</color>
-    <color name="border_color">#d1d0d5</color>
-    <color name="btn_down1">#77a035</color>
-    <color name="black1">#111111</color>
-    <color name="grey">#ffffffff</color>
-    <color name="item_selected">#efefef</color>
-    <color name="subscribe_item_drag_stroke">#ffd2d2d2</color>
-    <color name="subscribe_item_drag_bg">#fff5f5f5</color>
-    <color name="subscribe_item_text_color_pressed">#ffb9b9b9</color>
-    <color name="subscribe_item_selected_stroke">#ffcc3131</color>
-    <item name="subscribe_item_text_color_normal" type="color">@color/default_text</item>
-    <color name="subscribe_item_selected_bg">#ffffffff</color>
-    <color name="subscribe_item_disabled_stroke">#ffd9d9d9</color>
-    <color name="subscribe_item_disabled_bg">#ffefefef</color>
-    <color name="subscribe_item_pressed_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_pressed_bg">#fff9f9f9</color>
-    <color name="subscribe_item_normal_stroke">#ffcdcdcd</color>
-    <color name="subscribe_item_normal_bg">#fff5f5f5</color>
-    <color name="default_text">#ff454545</color>
-    <color name="subscribe_tip_text">#ff2e2e2e</color>
-    <color name="subscribe_seperate_line">#ffcdcdcd</color>
-    <color name="calendar_divider">#ffffff</color>
-    <color name="calendar_active_month_bg">#ffffff</color>
-    <color name="calendar_bg">#ffffffff</color>
-    <color name="calendar_inactive_month_bg">#ffffff</color>
-    <color name="calendar_highlighted_day_bg">#ffffff</color>
-    <color name="calendar_text_inactive">#ffffff</color>
-    <color name="calendar_text_active">#1b1b1b</color>
-    <color name="calendar_state_today_bg">#ffffff</color>
-    <color name="calendar_state_unselect_bg">#dbdbdb</color>
-    <color name="calendar_text_selected">#ffffffff</color>
-    <color name="calendar_text_unselectable">#7f778088</color>
-    <color name="calendar_text_highlighted">#ff778088</color>
-    <!-- 标题栏下面的一条横线，灰色 -->
-    <color name="titleline">#e3e3e3</color>
-    <!-- 主题，蓝色 -->
-    <color name="theme_color_bule">#2692ff</color>
-    <color name="chat_time">#999999</color>
-
+    <color name="color_adadad">#adadad</color>
+    <color name="color_00000000">#00000000</color>
 </resources>

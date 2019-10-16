@@ -99,7 +99,12 @@ public class SharedPreferencesUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences(appSavaData, Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, "");
     }
-
+    public String getString(String key,String defaultStr) {
+        //获取sharedPreferences对象
+        SharedPreferences sharedPreferences = context.getSharedPreferences(appSavaData, Context.MODE_PRIVATE);
+        String v= sharedPreferences.getString(key, defaultStr);
+        return sharedPreferences.getString(key, defaultStr);
+    }
 
     public void putBoolean(String key, boolean v) {
         //获取sharedPreferences对象

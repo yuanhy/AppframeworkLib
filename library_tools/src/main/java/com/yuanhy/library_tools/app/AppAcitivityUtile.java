@@ -4,19 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 
-import com.vector.update_app.UpdateAppBean;
-import com.vector.update_app.UpdateAppManager;
-import com.vector.update_app.UpdateCallback;
-import com.vector.update_app.listener.ExceptionHandler;
-import com.vector.update_app.listener.IUpdateDialogFragmentListener;
-import com.yuanhy.library_tools.http.okgo.OkGoUpdateHttpUtil;
-import com.yuanhy.library_tools.util.AppCommonTool;
-import com.yuanhy.library_tools.util.HttpResultUtil;
-import com.yuanhy.library_tools.util.JsonOrEntyTools;
-import com.yuanhy.library_tools.util.SharedPreferencesUtil;
-import com.yuanhy.library_tools.util.StringUtil;
 
 /**
  * Created by yuanhy on 2018/1/22.

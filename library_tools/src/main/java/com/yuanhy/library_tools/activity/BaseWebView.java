@@ -4,13 +4,15 @@ import android.content.Context;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -23,9 +25,8 @@ import java.net.URL;
 
 public class BaseWebView extends BaseActivity {
 
-    BridgeWebView mBdwebview;
+//    BridgeWebView mBdwebview;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,18 +45,11 @@ public class BaseWebView extends BaseActivity {
     public void initWebView(BridgeWebView mBdwebview, String url){
 
 
-
-
-
         mBdwebview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
         mBdwebview.getSettings().setAllowFileAccess(true); // 允许访问文件
-
-
         mBdwebview.getSettings().setBuiltInZoomControls(true); // 设置显示缩放按钮
         mBdwebview.getSettings().setSupportZoom(true); // 支持缩放
-
-
 
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -100,6 +94,10 @@ public class BaseWebView extends BaseActivity {
         mBdwebview.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url!=null&&url.contains("goBack:")){
+                    finish();
+                    return true;
+                }
                 view.loadUrl(url);
                 Log.v("webview","url:"+url);
                 return true;

@@ -412,7 +412,7 @@ public class AndroidOkHttp3 implements Http {
                     dir.mkdirs();
                 }
 
-                File file = new File(dir, fileName);
+                File file = new File(downFilePath+ File.separator+ fileName);
                 if (!file.exists()) {
                     file.createNewFile();
                 }
@@ -433,12 +433,14 @@ public class AndroidOkHttp3 implements Http {
                     isOk = true;
                     AppFramentUtil.logCatUtil.i(TAG, file.getAbsolutePath());
                 } catch (Exception e) {
+                    callBack.onError("");
                     AppFramentUtil.logCatUtil.i(TAG, e.getMessage());
                 } finally {
                     try {
                         if (is != null)
                             is.close();
                     } catch (IOException e) {
+                        callBack.onError("");
                     }
                     try {
                         if (fos != null)

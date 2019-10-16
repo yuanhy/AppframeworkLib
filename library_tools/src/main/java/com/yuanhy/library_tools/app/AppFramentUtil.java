@@ -13,14 +13,14 @@ import com.yuanhy.library_tools.task.Tasks;
  */
 
 public class AppFramentUtil {
-    /**
-     * 线程池
-     */
-    public static Tasks tasks = new ExecutorTasks();
-public static LogCatUtil logCatUtil;
+	/**
+	 * 线程池
+	 */
+	public static Tasks tasks = new ExecutorTasks();
+	public static LogCatUtil logCatUtil;
 
-public static void  initAppFramentUtil(Context c){
-    logCatUtil =LogCatUtil.getInstance(c.getApplicationContext());
-}
+	public static void initAppFramentUtil(Context c) {
+		logCatUtil = LogCatUtil.getInstance(c.getApplicationContext());
+	}
 
 }

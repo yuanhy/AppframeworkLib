@@ -28,7 +28,11 @@ public class LogCatUtil {
             Log.v(tag, logContent);
         }
     }
-
+    public void v(  String logContent) {
+        if (isShowLog) {
+            Log.v(TAG, logContent);
+        }
+    }
     public void d(String tag, String logContent) {
         if (isShowLog) {
             Log.d(tag, logContent);

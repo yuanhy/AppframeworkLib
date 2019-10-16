@@ -2,32 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1B8AD1"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
+    <!--android:background="#1B8AD1"-->
+    <!--android:clipToPadding="true"-->
+    <!--android:fitsSystemWindows="true"-->
+    <LinearLayout
+        android:id="@+id/title_main_lout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/tag_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></View>
+
+        <RelativeLayout
+            android:id="@+id/titile_main_lout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45">
+
+            <ImageView
+                android:id="@+id/image_back"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_20"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <TextView
+                android:id="@+id/title_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_48"
+                android:layout_marginRight="@dimen/dp_48"
+                android:singleLine="true"
+                android:textColor="#161616"
+                android:textSize="@dimen/sp_18" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_dedede" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 
     <ProgressBar
         android:id="@+id/progressBarHorizontal"
 
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_3"
-
-        android:max="100"
-        android:progress="0"
-        android:secondaryProgress="100"
-
         style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+
+        android:layout_height="@dimen/dp_3"
         android:layout_centerVertical="true"
+        android:max="100"
+
+        android:progress="0"
         android:progressDrawable="@drawable/progress_white"
-        />
+        android:secondaryProgress="100" />
 
     <com.github.lzyzsd.jsbridge.BridgeWebView
         android:id="@+id/bdwebview"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
     </com.github.lzyzsd.jsbridge.BridgeWebView>
 

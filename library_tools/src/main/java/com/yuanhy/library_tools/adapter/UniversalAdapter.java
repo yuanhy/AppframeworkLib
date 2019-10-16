@@ -1,17 +1,19 @@
 package com.yuanhy.library_tools.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class UniversalAdapter<T> extends Adapter<ViewHolder> {
+public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected Context mContext;
     protected int mLayoutId;
     protected List<T> mDatas;
@@ -44,7 +46,7 @@ public abstract class UniversalAdapter<T> extends Adapter<ViewHolder> {
         return viewHolder;
     }
 
-    protected int getPosition(android.support.v7.widget.RecyclerView.ViewHolder viewHolder) {
+    protected int getPosition( ViewHolder viewHolder) {
         return viewHolder.getAdapterPosition();
     }
 

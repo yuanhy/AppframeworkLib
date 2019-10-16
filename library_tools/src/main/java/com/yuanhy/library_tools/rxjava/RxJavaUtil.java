@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public abstract class RxJavaUtil {
     private String tag = "RxjavaUtil";
-    private Disposable disposableInterval;
+    private Disposable disposable;
 
     public static  <T>ObservableTransformer<T,T> io_uiMain(){
         return  new ObservableTransformer<T, T>() {
@@ -55,7 +55,7 @@ public abstract class RxJavaUtil {
 
             @Override
             public void onSubscribe(Disposable d) {
-                disposableInterval = d;
+                disposable = d;
             }
         });
     }
@@ -63,10 +63,10 @@ public abstract class RxJavaUtil {
     /**
      * 取消轮序接口
      */
-    public void cancelDisposableInterval() {
+    public void cancelDisposable() {
         //取消订阅
-        if (disposableInterval != null && !disposableInterval.isDisposed()) {
-            disposableInterval.dispose();
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
         }
     }
 

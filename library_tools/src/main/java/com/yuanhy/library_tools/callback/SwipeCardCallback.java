@@ -1,11 +1,12 @@
 package com.yuanhy.library_tools.callback;
 
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yuanhy.library_tools.adapter.UniversalAdapter;
 import com.yuanhy.library_tools.layoutmanager.CardConfig;

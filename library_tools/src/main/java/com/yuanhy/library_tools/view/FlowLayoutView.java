@@ -2,7 +2,6 @@ package com.yuanhy.library_tools.view;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,6 +11,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.OverScroller;
 import android.widget.Scroller;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;

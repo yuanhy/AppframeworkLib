@@ -33,6 +33,14 @@ public class FileDownUtile {
                 fileName, progressListener);
     }
 
+    /**
+     *
+     * @param context
+     * @param url 下载的地址url
+     * @param fileDownPath 文件目录
+     * @param fileName  文件名字
+     * @param progressListener
+     */
     public static void fileDown(Context context, String url, String fileDownPath, String fileName, ProgressListener progressListener) {
 
         AndroidOkHttp3 androidOkHttp3 = AndroidOkHttp3.getInstance(context);

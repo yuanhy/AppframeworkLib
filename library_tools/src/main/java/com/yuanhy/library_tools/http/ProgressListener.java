@@ -12,6 +12,16 @@ public abstract class ProgressListener {
      * @param done 是否下载结束
      */
     public    void onProgress(long fileSizeBytes, long remainingBytes, boolean done){}
+
+    /**
+     * 多线程下载器   应用层不需要实现
+     * 返回类型都是指的当前线程 是否下载结束
+     * @param fileSizeBytes 总大小
+     * @param remainingBytes 已经写入的文件大小
+     * @param datakey  线程标识
+     * @param thredId 线程ID
+     * @param done 是否下载结束
+     */
     public    void onProgress(long fileSizeBytes, long remainingBytes,String datakey ,String thredId ,boolean done){}
     public   void onOk(Object o){};
     public   void onError(Object o){};

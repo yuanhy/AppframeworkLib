@@ -4,6 +4,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.yuanhy.library_tools.app.AppFramentUtil;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.security.MessageDigest;
@@ -19,13 +21,65 @@ public class StringUtil {
     private static String host;
     private static String face;
 
-    public static boolean isNull(String string) {
-        if ("null".equals(string) || "".equals(string) || "NULL".equals(string) || " ".equals(string) || null == string) {
-            return true;
-        }
-        return false;
-    }
+    /**
+     * 定义script的正则表达式
+     */
+    private static final String REGEX_SCRIPT = "<script[^>]*?>[\\s\\S]*?<\\/script>";
+    /**
+     * 定义style的正则表达式
+     */
+    private static final String REGEX_STYLE = "<style[^>]*?>[\\s\\S]*?<\\/style>";
+    /**
+     * 定义HTML标签的正则表达式
+     */
+    private static final String REGEX_HTML = "<[^>]+>";
+    /**
+     * 定义空格回车换行符
+     */
+    private static final String REGEX_SPACE = "\\s*|\t|\r|\n";
+    public static String delHTMLTag(String htmlStr) {
 
+        htmlStr = htmlStr.replace("/<img.*\\/>/ig", "");
+        htmlStr = htmlStr.replace("/<\\/?[^>]*>/g",""); //去除HTML tag
+        htmlStr = htmlStr.replace("/[ | ]*\\n/g",""); //去除行尾空白
+        htmlStr = htmlStr.replace("/\\n[\\s| | ]*\\r/g",""); //去除多余空行
+        htmlStr=htmlStr.replace("/ /ig","");//去掉
+
+        htmlStr=htmlStr.replace("&quot;","\"");//去掉
+        htmlStr=htmlStr.replace("&amp;","&");//去掉
+        htmlStr=htmlStr.replace("&gt;",">");//去掉
+        htmlStr=htmlStr.replace("&lt;","<");//去掉
+        htmlStr=htmlStr.replace("&nbsp;"," ");//去掉
+        htmlStr=htmlStr.replace("&amp;","");//去掉
+        htmlStr=htmlStr.replace("lt;","");//去掉
+        htmlStr=htmlStr.replace("&p&amp;","");//去掉
+        htmlStr=htmlStr.replace("gt;","");//去掉
+
+        AppFramentUtil.logCatUtil.i("--------------","1:--->:"+htmlStr);
+        // 过滤script标签
+        Pattern p_script = Pattern.compile(REGEX_SCRIPT, Pattern.CASE_INSENSITIVE);
+        Matcher m_script = p_script.matcher(htmlStr);
+        htmlStr = m_script.replaceAll("");
+        // 过滤style标签
+        Pattern p_style = Pattern.compile(REGEX_STYLE, Pattern.CASE_INSENSITIVE);
+        Matcher m_style = p_style.matcher(htmlStr);
+        htmlStr = m_style.replaceAll("");
+        // 过滤html标签
+        Pattern p_html = Pattern.compile(REGEX_HTML, Pattern.CASE_INSENSITIVE);
+        Matcher m_html = p_html.matcher(htmlStr);
+        htmlStr = m_html.replaceAll("");
+        // 过滤空格回车标签
+        Pattern p_space = Pattern.compile(REGEX_SPACE, Pattern.CASE_INSENSITIVE);
+        Matcher m_space = p_space.matcher(htmlStr);
+        htmlStr = m_space.replaceAll("");
+        AppFramentUtil.logCatUtil.i("--------------","2:--->:"+htmlStr.trim());
+        return htmlStr.trim(); // 返回文本字符串
+    }
+    public static String setFontColor(String string,String  color){
+        string = "<font color=\""+color+"\">" + string + "</font>";
+
+        return string;
+    }
     /*
      * 判断是否为整数
      * @param str 传入的字符串
@@ -133,7 +187,7 @@ public class StringUtil {
      * @return
      */
     public static String getHidePhone(String phone) {
-        if (isNull(phone) || phone.length() < 11)
+        if (TextUtils.isEmpty(phone) || phone.length() < 11)
             return phone;
         String phones = phone.substring(0, 3) + "****" + phone.substring(7, phone.length());
         return phones;
@@ -147,7 +201,7 @@ public class StringUtil {
      */
     public static String formatURL(String host, String face) {
         StringBuffer _buf = new StringBuffer();
-        if (isNull(host) || isNull(face)) {
+        if (TextUtils.isEmpty(host) || TextUtils.isEmpty(face)) {
             return "";
         }
         if (host.endsWith("/") || face.startsWith("/")) {
@@ -295,7 +349,7 @@ public class StringUtil {
 
 
     public static String formatURL2(String host, String face, String name) {
-        if (isNull(host) || isNull(face)) {
+        if (TextUtils.isEmpty(host) || TextUtils.isEmpty(face)) {
             return "";
         }
         StringBuffer _buf = new StringBuffer();
@@ -305,7 +359,7 @@ public class StringUtil {
     }
 
     public static String formatMinImage(String url) {
-        if (isNull(url)) {
+        if (TextUtils.isEmpty(url)) {
             return url;
         }
         int endIndex = url.lastIndexOf(".");
@@ -315,7 +369,7 @@ public class StringUtil {
     }
 
     public static String formatMaxImage(String url) {
-        if (isNull(url)) {
+        if (TextUtils.isEmpty(url)) {
             return url;
         }
         String _newURL = url.replaceAll("_s.", ".");
@@ -652,7 +706,7 @@ public class StringUtil {
      * @return true 错误的格式
      */
     public static boolean isServerExcepInfo(String dataString) {
-        if (!StringUtil.isNull(dataString)) {
+        if (!TextUtils.isEmpty(dataString)) {
             if (dataString.contains("404 Not Found") || dataString.contains("404!") || (dataString.contains("502 Bad Gateway"))
                     || dataString.contains("<html><head><title>") || (dataString.contains("HTTP Status 404"))) {
                 return true;

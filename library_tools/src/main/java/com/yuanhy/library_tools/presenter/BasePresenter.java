@@ -2,6 +2,8 @@ package com.yuanhy.library_tools.presenter;
 
 
 
+import android.content.Context;
+
 import com.yuanhy.library_tools.rxjava.RxJavaUtil;
 
 import java.lang.ref.WeakReference;
@@ -15,5 +17,6 @@ public abstract class BasePresenter<T> extends RxJavaUtil {
        if (weakReference!=null){
            weakReference.clear();
        }
+       cancelDisposable();
     }
 }
