@@ -21,6 +21,7 @@ import androidx.core.graphics.ColorUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.yuanhy.library_tools.R;
 import com.yuanhy.library_tools.app.AppAcitivityUtile;
+import com.yuanhy.library_tools.interfaces.ListViewInterface;
 import com.yuanhy.library_tools.util.PermissionUtil;
 import com.yuanhy.library_tools.util.StatusBarUtil;
 
@@ -28,7 +29,7 @@ import com.yuanhy.library_tools.util.StatusBarUtil;
  * Created by yuanhy on 2018/1/23.
  */
 
-public abstract class BaseActicity2 extends Activity implements View.OnClickListener {
+public abstract class BaseActicity2 extends Activity implements View.OnClickListener, ListViewInterface {
     public Context context;
     StatusBarUtil statusBarUtil;
     //加载view

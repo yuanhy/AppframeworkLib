@@ -1,6 +1,7 @@
 package com.yuanhy.library_tools.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import com.yuanhy.library_tools.adapter.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public abstract class ListViewAdapter<T> extends BaseAdapter {
@@ -56,7 +58,11 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 		return position;
 	}
 
-
+	/**
+	 * 获取itenmView中需要实例化的 id对象
+	 * @return
+	 */
+	public abstract int[]   getConvertFindViewById();
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHodle viewHodle = null;
@@ -65,6 +71,12 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 				convertView = LayoutInflater.from(mContext).inflate(layoutId, parent, false);
 				viewHodle = new ViewHodle();
 				viewHodle.itemView = convertView;
+				int[] ids=getConvertFindViewById();
+				if (ids!=null&&ids.length>0){
+					for (int id:ids){
+						viewHodle.viewHashMap.put(id,convertView.findViewById(id));
+					}
+				}
 				convertView.setTag(viewHodle);
 			} else {
 				viewHodle = (ViewHodle) convertView.getTag();
@@ -86,6 +98,12 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 					convertView = LayoutInflater.from(mContext).inflate(layoutId, parent, false);
 					viewHodle = new ViewHodle();
 					viewHodle.itemView = convertView;
+					int[] ids=getConvertFindViewById();
+					if (ids!=null&&ids.length>0){
+						for (int id:ids){
+							viewHodle.viewHashMap.put(id,convertView.findViewById(id));
+						}
+					}
 					convertView.setTag(viewHodle);
 				} else {
 					Object object = convertView.getTag();
@@ -95,6 +113,12 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 						convertView = LayoutInflater.from(mContext).inflate(layoutId, parent, false);
 						viewHodle = new ViewHodle();
 						viewHodle.itemView = convertView;
+						int[] ids=getConvertFindViewById();
+						if (ids!=null&&ids.length>0){
+							for (int id:ids){
+								viewHodle.viewHashMap.put(id,convertView.findViewById(id));
+							}
+						}
 						convertView.setTag(viewHodle);
 					}
 				}
@@ -121,6 +145,13 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 	}
 	public static class ViewHodle {
 		public View itemView;
+		public HashMap<Integer,Object> viewHashMap =new HashMap<>();
+		public  <Y extends View> Y  getFindViewById(int id){//获取的类型需要自己强转例如（TextView）
+			if (viewHashMap.get(id)==null){
+				return null;
+			}
+			return (Y) viewHashMap.get(id);
+		}
 	}
 
 	public static class HeaderViewHodle {

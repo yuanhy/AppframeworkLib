@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentManager;
 import com.gyf.barlibrary.ImmersionBar;
 import com.yuanhy.library_tools.R;
 import com.yuanhy.library_tools.app.AppAcitivityUtile;
+import com.yuanhy.library_tools.popwindows.LoadPopupWindow;
+import com.yuanhy.library_tools.popwindows.ToastPopWindow;
 import com.yuanhy.library_tools.util.StatusBarUtil;
 
 import butterknife.ButterKnife;
@@ -33,7 +35,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity
 	public Unbinder mUnbinder;
 	public FragmentManager fragmentManager;
 	private View titleBarView;
-
+	public LoadPopupWindow loadPopupWindow;
+	public ToastPopWindow toastPopWindow;
 	@Override
 	public void onCreate(
 			Bundle savedInstanceState) {
@@ -45,7 +48,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity
 		context = this;
 		ActivityManagerUtile.getInstance().addActivity(this);
 		fragmentManager = getSupportFragmentManager();
+		initPopWindow();
 	}
+
+	private void initPopWindow() {
+		loadPopupWindow = new LoadPopupWindow((Activity) context);
+		toastPopWindow = new ToastPopWindow((Activity) context);
+	}
+
 	/**
 	 * 设置状态栏 字体
 	 *  transparent true 黑色字体,false 白色字体。背景全透明
@@ -125,6 +135,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity
 		if (mUnbinder!=null&&mUnbinder != Unbinder.EMPTY) {
 			mUnbinder.unbind();
 			this.mUnbinder = null;
+		}
+		if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
+			mUnbinder.unbind();
+			this.mUnbinder = null;
+		}
+		if (loadPopupWindow != null && loadPopupWindow.isShowing()) {
+			loadPopupWindow.dismiss(true);
+		}
+		if (toastPopWindow != null && toastPopWindow.isShowing()) {
+			toastPopWindow.dismiss();
 		}
 		super.onDestroy();
 	}

@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -19,11 +20,12 @@ import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.yuanhy.library_tools.presenter.BasePresenter;
+import com.yuanhy.library_tools.util.LogCatUtil;
 import com.yuanhy.library_tools.util.SharedPreferencesUtil;
 
 import java.net.URL;
 
-public class BaseWebView extends BaseActivity {
+public abstract class BaseWebView extends BaseActivity {
 
 //    BridgeWebView mBdwebview;
 
@@ -32,6 +34,7 @@ public class BaseWebView extends BaseActivity {
         super.onCreate(savedInstanceState);
 
     }
+
 
     @Override
     public BasePresenter createPresenter() {
@@ -89,7 +92,7 @@ public class BaseWebView extends BaseActivity {
          * 适应内容大小 2、LayoutAlgorithm.SINGLE_COLUMN:适应屏幕，内容将自动缩放
          */
         mBdwebview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-
+// 通过addJavascriptInterface()将Java对象映射到JS对象 //参数1：Javascript对象名 //参数2：Java对象名
         mBdwebview.setWebChromeClient(new WebChromeClient());//这行最好不要丢掉
         mBdwebview.setWebViewClient(new WebViewClient(){
             @Override
@@ -123,9 +126,9 @@ public class BaseWebView extends BaseActivity {
             String oldCookie = cookieManager.getCookie(url);
 
             URL aURL = new URL(url);
-            String cookie = SharedPreferencesUtil.getSharedPreferencesUtil(this).getString(  "HC360.SSOUser=");
+            String cookie = SharedPreferencesUtil.getSharedPreferencesUtil(this).getString(  "abctext");
             StringBuilder sbCookie = new StringBuilder();
-            sbCookie.append(String.format("HC360.SSOUser=" + cookie));
+            sbCookie.append(String.format("abctext" + cookie));
             //webview在使用cookie前会前判断保存cookie的domain和当前要请求的domain是否相同，相同才会发送cookie
             sbCookie.append(String.format(";domain=%s",aURL.getHost())); //注意，是getHost()，不是getAuthority(),
             sbCookie.append(String.format(";path=%s","/"));

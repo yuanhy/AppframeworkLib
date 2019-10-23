@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yuanhy.library_tools.app.AppFramentUtil;
 import com.yuanhy.library_tools.popwindows.LoadPopupWindow;
 import com.yuanhy.library_tools.popwindows.ToastPopWindow;
 import com.yuanhy.library_tools.presenter.BasePresenter;
@@ -22,12 +23,18 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseActicity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		if (getLoutResourceId()!=0){
+			setContentView(getLoutResourceId());
+			initUnbinder();
+		}
+		AppFramentUtil.logCatUtil.i("进入："+TAG);
 		basePresenter = createPresenter();
 		if (basePresenter != null)
 			basePresenter.onBindView(this);
 		initPopWindow();
 	}
+
+	public  abstract   int getLoutResourceId();
 
 	private void initPopWindow() {
 		loadPopupWindow = new LoadPopupWindow((Activity) context);
@@ -62,6 +69,15 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseActicity
 	}
 
 
+	@Override
+	public void refreshData() {
+
+	}
+
+	@Override
+	public void loadMoveData() {
+
+	}
 
 	@Override
 	public void onClick(View v) {

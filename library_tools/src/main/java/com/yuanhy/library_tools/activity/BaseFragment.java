@@ -9,13 +9,14 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.yuanhy.library_tools.interfaces.ListViewInterface;
 import com.yuanhy.library_tools.popwindows.LoadPopupWindow;
 import com.yuanhy.library_tools.popwindows.ToastPopWindow;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BaseFragment extends Fragment   {
+public class BaseFragment extends Fragment   implements ListViewInterface {
 	private Unbinder mUnbinder;
 	public Context context;
 	public LoadPopupWindow loadPopupWindow;
@@ -57,5 +58,15 @@ public class BaseFragment extends Fragment   {
 			this.mUnbinder = null;
 		}
 		super.onDestroy();
+	}
+
+	@Override
+	public void refreshData() {
+
+	}
+
+	@Override
+	public void loadMoveData() {
+
 	}
 }

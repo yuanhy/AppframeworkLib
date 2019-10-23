@@ -85,7 +85,6 @@ public class WebViewUtilActivity extends BaseWebView {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_web_view_util);
 		url = getIntent().getStringExtra("url");
 		title = getIntent().getStringExtra("title");
 		isDarkFont = getIntent().getBooleanExtra("isDarkFont",true);
@@ -142,6 +141,11 @@ public class WebViewUtilActivity extends BaseWebView {
 //				function.onCallBack("android向js/h5传递数据");
 //			}
 //		});
+	}
+
+	@Override
+	public int getLoutResourceId() {
+		return R.layout.activity_web_view_util;
 	}
 
 	ProgressBar progressBar;
