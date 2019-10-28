@@ -144,7 +144,7 @@ public class WebViewUtilActivity extends BaseWebView {
 	}
 
 	@Override
-	public int getLoutResourceId() {
+	public int getLayoutResourceId() {
 		return R.layout.activity_web_view_util;
 	}
 

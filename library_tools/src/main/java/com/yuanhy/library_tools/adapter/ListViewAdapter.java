@@ -145,7 +145,7 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 	}
 	public static class ViewHodle {
 		public View itemView;
-		public HashMap<Integer,Object> viewHashMap =new HashMap<>();
+		private HashMap<Integer,Object> viewHashMap =new HashMap<>();
 		public  <Y extends View> Y  getFindViewById(int id){//获取的类型需要自己强转例如（TextView）
 			if (viewHashMap.get(id)==null){
 				return null;

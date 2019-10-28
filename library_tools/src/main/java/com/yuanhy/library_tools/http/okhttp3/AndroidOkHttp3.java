@@ -413,9 +413,13 @@ public class AndroidOkHttp3 implements Http {
                 }
 
                 File file = new File(downFilePath+ File.separator+ fileName);
-                if (!file.exists()) {
+                if (!file.exists()) {//创建文件
+                    file.createNewFile();
+                }else {//删除文件创建新的空文件
+                    file.delete();
                     file.createNewFile();
                 }
+
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();

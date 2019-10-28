@@ -1,7 +1,6 @@
 package com.yuanhy.library_tools.activity;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,7 +10,6 @@ import com.yuanhy.library_tools.popwindows.ToastPopWindow;
 import com.yuanhy.library_tools.presenter.BasePresenter;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public abstract class BaseActivity<T extends BasePresenter> extends BaseActicity2 implements View.OnClickListener {
@@ -23,8 +21,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseActicity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getLoutResourceId()!=0){
-			setContentView(getLoutResourceId());
+		if (getLayoutResourceId()!=0){
+			setContentView(getLayoutResourceId());
 			initUnbinder();
 		}
 		AppFramentUtil.logCatUtil.i("进入："+TAG);
@@ -34,7 +32,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseActicity
 		initPopWindow();
 	}
 
-	public  abstract   int getLoutResourceId();
+	public  abstract   int getLayoutResourceId();
 
 	private void initPopWindow() {
 		loadPopupWindow = new LoadPopupWindow((Activity) context);

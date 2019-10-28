@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.yuanhy.library_tools.app.AppFramentUtil;
 import com.yuanhy.library_tools.presenter.BasePresenter;
 import com.yuanhy.library_tools.util.LogCatUtil;
 import com.yuanhy.library_tools.util.SharedPreferencesUtil;
@@ -102,7 +103,7 @@ public abstract class BaseWebView extends BaseActivity {
                     return true;
                 }
                 view.loadUrl(url);
-                Log.v("webview","url:"+url);
+                AppFramentUtil.logCatUtil.v("webview","url:"+url);
                 return true;
             }
             @Override
