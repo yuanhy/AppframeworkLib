@@ -92,6 +92,29 @@ public class JsonOrEntyTools {
         }
         return jsonArray2;
     }
+    /**
+     * 通过实体对象或去JSONArray对象
+     *
+     * @return
+     */
+    public static JSONArray  getJSONArray2 (ArrayList<Class > list) {
+        JSONArray jsonArray2=new JSONArray();
+
+        com.alibaba.fastjson.JSONArray jsonArray= new com.alibaba.fastjson.JSONArray ();
+        for (Class obj:list){
+            try {
+                JSONObject jsonObject= new JSONObject(getJsonString(obj));
+                jsonArray2.put (jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace ();
+            }
+
+            JSON json= (JSON) JSON.parse (getJsonString(obj));
+            jsonArray.add(json)  ;
+
+        }
+        return jsonArray2;
+    }
 
 
 }

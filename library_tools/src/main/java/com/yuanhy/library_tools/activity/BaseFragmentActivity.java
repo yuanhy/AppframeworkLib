@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.FloatRange;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.FloatRange;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.yuanhy.library_tools.R;

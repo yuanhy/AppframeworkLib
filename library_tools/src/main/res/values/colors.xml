@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
@@ -11,4 +11,101 @@
     <color name="color_161616">#161616</color>
     <color name="color_adadad">#adadad</color>
     <color name="color_00000000">#00000000</color>
+    <color name="color_026293">#026293</color>
+    <color name="color_869fba" tools:ignore="MissingDefaultResource">#869fba</color>
+    <color name="color_bfcede">#bfcede</color>
+    <color name="color_0b2947">#0b2947</color>
+    <color name="color_26051c33">#26051c33</color>
+    <color name="color_597999">#597999</color>
+    <color name="color_6384a3">#6384a3</color>
+    <color name="color_051c33">#051c33</color>
+    <color name="color_0a2846">#0a2846</color>
+    <color name="color_e0a363">#e0a363</color>
+    <color name="color_FF4E00">#FF4E00</color>
+    <color name="color_ecd5bd">#ecd5bd</color>
+    <color name="color_254566">#254566</color>
+    <color name="color_60799B">#60799B</color>
+    <color name="color_f1f1f1">#f1f1f1</color>
+
+    <color name="color_d4dfea">#d4dfea</color>
+    <color name="color_0A2846">#0A2846</color>
+    <color name="color_2a4f71">#2a4f71</color>
+
+    <color name="rescolor_000000">#000000</color>
+    <color name="rescolor_929292">#929292</color>
+    <color name="rescolor_2692ff">#2692ff</color>
+    <color name="rescolor_dedede">#dedede</color>
+    <color name="rescolor_ffffff">#ffffff</color>
+    <color name="rescolor_161616">#161616</color>
+    <color name="rescolor_adadad">#adadad</color>
+    <color name="rescolor_00000000">#00000000</color>
+    <color name="rescolor_026293">#026293</color>
+    <color name="rescolor_869fba" tools:ignore="MissingDefaultResource">#869fba</color>
+    <color name="rescolor_bfcede">#bfcede</color>
+    <color name="rescolor_0b2947">#0b2947</color>
+    <color name="rescolor_26051c33">#26051c33</color>
+    <color name="rescolor_597999">#597999</color>
+    <color name="rescolor_6384a3">#6384a3</color>
+    <color name="rescolor_051c33">#051c33</color>
+    <color name="rescolor_0a2846">#0a2846</color>
+    <color name="rescolor_e0a363">#e0a363</color>
+    <color name="rescolor_FF4E00">#FF4E00</color>
+    <color name="rescolor_ecd5bd">#ecd5bd</color>
+    <color name="rescolor_254566">#254566</color>
+    <color name="rescolor_60799B">#60799B</color>
+    <color name="rescolor_f1f1f1">#f1f1f1</color>
+
+    <color name="rescolor_d4dfea">#d4dfea</color>
+    <color name="rescolor_0A2846">#0A2846</color>
+    <color name="rescolor_2a4f71">#2a4f71</color>
+    <color name="rescolor_80000000">#80000000</color>
+
+    <color name="rescolor_50000000">#50000000</color>
+    <!--   新写的 颜色值-->
+    <color name="rescolor_3B3F52">#3B3F52</color>
+    <color name="rescolor_cc3B3F52">#cc3B3F52</color>
+    <color name="rescolor_eeeeee">#eeeeee</color>
+    <color name="rescolor_ef3a5c">#ef3a5c</color>
+    <color name="rescolor_01c3a2">#01c3a2</color>
+    <color name="rescolor_8001c3a2">#8001c3a2</color>
+
+    <color name="rescolor_2001c3a2">#2001c3a2</color>
+    <color name="rescolor_ff5143">#ff5143</color>
+    <color name="rescolor_b9bac8">#b9bac8</color>
+
+    <color name="rescolor_6f6f78">#6f6f78</color>
+    <color name="rescolor_E7493D">#E7493D</color>
+    <color name="rescolor_07A98D">#07A98D</color>
+    <color name="rescolor_999999">#999999</color>
+
+    <color name="rescolor_333333">#333333</color>
+
+    <color name="rescolor_e2e2e2">#e2e2e2</color>
+    <color name="rescolor_f6f6f6">#f6f6f6</color>
+    <color name="rescolor_e50203">#e50203</color>
+    <color name="rescolor_20e50203">#20e50203</color>
+    <color name="rescolor_80e50203">#80e50203</color>
+    <color name="rescolor_ffdcd9">#ffdcd9</color>
+    <color name="rescolor_ccf3e3">#ccf3e3</color>
+    <color name="rescolor_a3a4ad">#a3a4ad</color>
+    <color name="rescolor_ffecea">#ffecea</color>
+
+    <color name="rescolor_43485c">#43485c</color>
+
+    <color name="rescolor_c1c2cf">#c1c2cf</color>
+    <color name="rescolor_e9b964">#e9b964</color>
+    <color name="rescolor_4a90e2">#4a90e2</color>
+    <color name="rescolor_7a7a83">#7a7a83</color>
+
+    <color name="rescolor_c8c9d4">#c8c9d4</color>
+    <color name="rescolor_2b2d3a">#2b2d3a</color>
+    <color name="rescolor_1a000000">#1a000000</color>
+    <color name="rescolor_ffb7b1">#ffb7b1</color>
+    <color name="rescolor_ff5c4c">#ff5c4c</color>
+    <color name="rescolor_dadae2">#dadae2</color>
+    <color name="rescolor_4b5167">#4b5167</color>
+    <color name="rescolor_575c73">#575c73</color>
+    <color name="rescolor_ff7c6a">#ff7c6a</color>
+    <color name="rescolor_6cb0ff">#6CB0FF</color>
+
 </resources>

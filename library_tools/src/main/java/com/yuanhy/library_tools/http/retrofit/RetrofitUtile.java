@@ -51,7 +51,7 @@ public class RetrofitUtile {
 		loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 		Interceptor interceptor = new Interceptor() {
 			@Override
-			public Response intercept(Interceptor.Chain chain) throws IOException {
+			public Response intercept(Chain chain) throws IOException {
 				Request builder = chain.request().newBuilder()
 //                        .addHeader("token",你的ToKen)
 						.build();
@@ -87,7 +87,7 @@ public class RetrofitUtile {
 		loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 		Interceptor interceptor = new Interceptor() {
 			@Override
-			public Response intercept(Interceptor.Chain chain) throws IOException {
+			public Response intercept(Chain chain) throws IOException {
 				Request builder = chain.request().newBuilder()
 //                        .addHeader("token",你的ToKen)
 						.build();
@@ -123,7 +123,7 @@ public class RetrofitUtile {
 		loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 		Interceptor interceptor = new Interceptor() {
 			@Override
-			public Response intercept(Interceptor.Chain chain) throws IOException {
+			public Response intercept(Chain chain) throws IOException {
 				Request builder = chain.request().newBuilder()
 //                        .addHeader("token",你的ToKen)
 						.build();

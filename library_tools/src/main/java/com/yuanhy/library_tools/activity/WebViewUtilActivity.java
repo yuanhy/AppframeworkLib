@@ -103,7 +103,12 @@ public class WebViewUtilActivity extends BaseWebView {
 		title_name_tv.setText(title);
 		setActivityTittleBar();
 		if (backImageId>0){
-			image_back.setOnClickListener((v)-> finish());
+			image_back.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
 		}
 		GlideUtil.getGlideImageViewUtil().setImageView(context,backImageId,image_back);
 		bdwebview = findViewById(R.id.bdwebview);
@@ -119,7 +124,7 @@ public class WebViewUtilActivity extends BaseWebView {
 
 
 		// 通过addJavascriptInterface()将Java对象映射到JS对象 //参数1：Javascript对象名 //参数2：Java对象名
-		bdwebview.addJavascriptInterface(new AndroidtoJs(), "android");//AndroidtoJS类对象映射到js的test对象
+		bdwebview.addJavascriptInterface(new AndroidtoJs(), "android");//AndroidtoJS类对象映射到js的android对象
 //		//  //注册submitFromWeb方法  用来接收js/h5 发送来的数据   onCallBack 是给js发送消息
 //		bdwebview.registerHandler("changeChild", new BridgeHandler() {
 //			@Override

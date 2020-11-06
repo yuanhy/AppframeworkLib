@@ -8,6 +8,7 @@ import com.yuanhy.library_tools.app.AppFramentUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -154,13 +155,21 @@ public class StringUtil {
     }
 
     /**
-     * 【是否全汉子】
+     * 是否包含汉字
      *
      * @param str
      * @return返回true 否则false
      */
     public static boolean isChina(String str) {
-        return str.matches("[\\u4e00-\\u9fa5]+");
+        boolean bl= false;
+        for (int i = 0; i < str.length(); i++) {
+            String  s=str.substring(i,i+1);
+            if ( s .matches("[\\u4e00-\\u9fa5]+")){
+                bl=true;
+                break;
+            }
+        }
+        return bl;
     }
 
     /**
@@ -192,7 +201,47 @@ public class StringUtil {
         String phones = phone.substring(0, 3) + "****" + phone.substring(7, phone.length());
         return phones;
     }
+    /**
+     *隐藏姓名后的名字
+     *
+     * @param name
+     * @return
+     */
+    public static String hideName(String name) {
+        if (TextUtils.isEmpty(name) )
+            return "";
+        int nameLeth =name.length();
+        if (nameLeth==1){
+            return name;
+        }
+        String namehide=name.substring(0, 1);
+        for (int i = 1; i <nameLeth ; i++) {
+            namehide=namehide+"*";
+        }
+        return namehide;
+    }
+    /**
+     * 隐藏字符串中的文字用*代替
+     * @param stase 开始几位不隐藏
+     * @param end 最后几位不隐藏
+     * @param hideStr 字符串
+     * @return
+     */
+    public static String hideStr(int stase,int end,String hideStr) {
+        if (TextUtils.isEmpty(hideStr) )
+            return "";
+        int nameLeth =hideStr.length();
+        if (nameLeth<= stase+end){
+            return hideStr;
+        }
 
+        String namehide=hideStr.substring(0, stase);
+        for (int i = stase; i <nameLeth-end ; i++) {
+            namehide=namehide+"*";
+        }
+        namehide=namehide+hideStr.substring(nameLeth-end, nameLeth);
+        return namehide;
+    }
 
     /**
      * @param host
@@ -560,6 +609,19 @@ public class StringUtil {
     }
 
     /**
+     * 根据系统编码获取字节长度
+     * //此处判断的 字节数 是根据系统编码有关   GBK 站三个字符，手机默认的GBK，
+     * // UTF-8是2个   如果想固定汉字是两个可以用  StringUtil.String_length()
+     * @param value
+     * @return
+     */
+    public static int getStringlength(String value) {
+
+        return value.getBytes(Charset.defaultCharset()).length;
+    }
+
+
+    /**
      * unicode 转字符串
      */
     public static String unicode2String(String unicode) {
@@ -602,6 +664,9 @@ public class StringUtil {
      * @return
      */
     public static boolean letter(String s) {
+        if (TextUtils.isEmpty(s)){
+            return false;
+        }
         char c = s.charAt(0);
         int i = (int) c;
         if ((i >= 65 && i <= 90) || (i >= 97 && i <= 122)) {
@@ -653,34 +718,6 @@ public class StringUtil {
         return simpleDateFormat.format(date);
     }
 
-    /**
-     * 获取日期
-     *
-     * @return
-     */
-    public static long getDateLong(String dateString) {
-        DateFormat format1 = new SimpleDateFormat("yyyy年MM月dd日");
-        Date date = null;
-        try {
-            date = format1.parse(dateString);
-            return date.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    /**
-     * 获取日期
-     *
-     * @return
-     */
-    public static String getDate2() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
-//获取当前时间
-        Date date = new Date(System.currentTimeMillis());
-        return simpleDateFormat.format(date);
-    }
 
     /**
      * 获取日期
@@ -715,4 +752,118 @@ public class StringUtil {
         } else
             return false;
     }
+
+    /**
+     * 判断字符串是否是汉字或者是英文
+     * @param str
+     * @return true 是
+     */
+    public static boolean isChineseCharacterEnglish(String str){
+    Pattern p = Pattern.compile("[a-zA-Z|\u4e00-\u9fa5]+");
+    Matcher m = p.matcher(str);
+    if (!m.matches()){//
+        return false;
+    }
+    return true;
+}
+
+    /**
+     * 保留n位小数正则
+     * @param number
+     * @param n
+     * @return
+     */
+    public static boolean isOnlyPointNumber(String number,int n) {//保留n位小数正则
+        String  regex   = "^\\d+\\.?\\d{0,"+n+"}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
+    /**
+     * 使用java正则表达式去掉多余的.与0
+     * @param s
+     * @return  string
+     */
+    public  static String replaceDoubleZero(String s){
+        if(null != s && s.indexOf(".") > 0){
+            s = s.replaceAll("0+?$", "");//去掉多余的0
+            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return s;
+    }
+    /**
+     * 截取小数点后几位
+     *
+     * @param s
+     * @param scale
+     * @return
+     */
+    public static String subString(String s, int scale) {
+        if (s == null) {
+            return "";
+        }
+
+        if (s.indexOf(".") > 0) {
+
+            if (scale == 0) {
+                s = s.substring(0, s.indexOf("."));
+            } else {
+                int index = (s.indexOf(".") + scale + 1);
+                if (index >= s.length()) {
+                    s = s.substring(0, s.length());
+                } else {
+                    s = s.substring(0, index);
+                }
+
+            }
+        }
+        return s;
+    }
+
+    /**
+     * 把字符串小数点后添加几位
+     *
+     * @param s
+     * @param scale
+     * @return
+     */
+    public static String addString(String s, int scale) {
+        if (s == null) {
+            return "";
+        }
+
+        if (scale == 0) {
+            return s;
+        }
+
+        if (s.indexOf(".") > 0) {//有小数点
+
+            String str = s.substring(s.indexOf(".") + 1, s.length());
+
+            if (str.length() > scale) {
+                s = s.substring(0, s.indexOf(".") + scale + 1);
+            } else if (str.length() < scale) {
+                int count = scale - str.length();
+
+                String zero = "";
+
+                for (int i = 0; i < count; i++) {
+                    zero += "0";
+                }
+
+                s = s + zero;
+            }
+        } else {//没有小数点
+
+            String zero = "";
+
+            for (int i = 0; i < scale; i++) {
+                zero += "0";
+            }
+
+            s = s + "." + zero;
+        }
+        return s;
+    }
+
 }

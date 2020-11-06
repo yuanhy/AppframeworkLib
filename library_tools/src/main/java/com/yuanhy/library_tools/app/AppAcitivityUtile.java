@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.ClipboardManager;
+import android.widget.Toast;
+
+import com.yuanhy.library_tools.R;
 
 
 /**
@@ -44,5 +48,35 @@ public class AppAcitivityUtile {
         context.startActivity(intent);
     }
 
+    /**
+     * 复制到系统剪切板
+     *
+     * @param str
+     */
+    public static void saveToClipboard(Context context,String str) {
+        // 从API11开始android推荐使用android.content.ClipboardManager
+        // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+        ClipboardManager cm = (ClipboardManager)  context.getSystemService(Context.CLIPBOARD_SERVICE);
+        // 将文本内容放到系统剪贴板里。
+        cm.setText(str);
 
+        Toast.makeText(context,"复制到剪切板",Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * 复制到系统剪切板
+     *
+     */
+    public static String getToClipboard(Context context) {
+        // 从API11开始android推荐使用android.content.ClipboardManager
+        // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+        ClipboardManager cm = (ClipboardManager)  context.getSystemService(Context.CLIPBOARD_SERVICE);
+        // 将文本内容放到系统剪贴板里。
+        if (cm==null||cm.getText( )==null){
+            return "";
+        }
+      return cm.getText( ).toString();
+
+
+    }
 }

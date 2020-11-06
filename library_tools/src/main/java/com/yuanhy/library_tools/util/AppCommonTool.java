@@ -1,5 +1,6 @@
 package com.yuanhy.library_tools.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -12,7 +13,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 
 import java.io.BufferedReader;
@@ -431,4 +434,17 @@ public class AppCommonTool {
         }
         return null;
     }
+
+    /**
+     *  屏幕密度（0.75 / 1.0 / 1.5）
+     * @param activity
+     * @return
+     */
+    public static float getDensity(Activity activity){
+        WindowManager windowManager = activity.getWindowManager();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.density;// 屏幕密度（0.75 / 1.0 / 1.5）
+    }
+
 }

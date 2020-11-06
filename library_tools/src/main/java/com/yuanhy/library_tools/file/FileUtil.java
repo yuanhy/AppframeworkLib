@@ -74,7 +74,7 @@ public class FileUtil {
      *
      * @param file
      */
-    public  static  String getMIMEType(java.io.File file) {
+    public  static  String getMIMEType(File file) {
 
         String type = "*/*";
         String fName = file.getName();

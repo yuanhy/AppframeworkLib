@@ -40,24 +40,24 @@ public abstract class RxJavaUtil {
      * @param period 秒单位
      */
     public void interval(long period) {
-        Observable.interval(period, TimeUnit.SECONDS).compose(RxJavaUtil.io_uiMain()).subscribe(new ObServerBean<Long>() {
-            @Override
-            public void onSuccees(Long aLong) {
-                AppFramentUtil.logCatUtil.i(tag,
-                        "interval：" + aLong);
-                intervalWork();
-            }
-
-            @Override
-            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
-
-            }
-
-            @Override
-            public void onSubscribe(Disposable d) {
-                disposable = d;
-            }
-        });
+//        Observable.interval(period, TimeUnit.SECONDS).compose(RxJavaUtil.io_uiMain()).subscribe(new ObServerBean<Long>() {
+//            @Override
+//            public void onSuccees(Long aLong) {
+//                AppFramentUtil.logCatUtil.i(tag,
+//                        "interval：" + aLong);
+//                intervalWork();
+//            }
+//
+//            @Override
+//            protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+//
+//            }
+//
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                disposable = d;
+//            }
+//        });
     }
 
     /**

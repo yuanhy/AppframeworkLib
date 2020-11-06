@@ -68,12 +68,12 @@ public interface Http {
      * @param fileName 文件名字
      * @param progressListener
      */
-    void downFileMultithreadBreakpoint(long downloadLength,long contentLength,String url, String downFilePath, String fileName, ProgressListener progressListener);
+    void downFileMultithreadBreakpoint(long downloadLength, long contentLength, String url, String downFilePath, String fileName, ProgressListener progressListener);
 
     /**
      * 获取文件的长度
      * @param url
      * @return
      */
-    long getContentLength (String url,YCallBack callBack);
+    long getContentLength(String url, YCallBack callBack);
 }

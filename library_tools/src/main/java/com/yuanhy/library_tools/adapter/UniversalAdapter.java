@@ -1,6 +1,7 @@
 package com.yuanhy.library_tools.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,7 +9,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
 
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,11 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolde
     protected ViewGroup mRv;
     private OnItemClickListener mOnItemClickListener;
 
+    /**
+     * 泛型T  记得写入进去。不然会出小问题
+     * @param onItemClickListener
+     * @return
+     */
     public UniversalAdapter setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
         return this;
@@ -82,7 +87,13 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolde
 
     public void onBindViewHolder(ViewHolder holder, int position) {
         this.setListener(position, holder);
-        this.convert(holder, this.mDatas.get(position));
+        try {
+            this.convert(holder, this.mDatas.get(position));
+            this.convert(holder, this.mDatas.get(position),position);
+        }catch (IndexOutOfBoundsException index){
+            index.getStackTrace();
+        }
+
     }
 
     protected void setListener(final int position, final ViewHolder viewHolder) {
@@ -110,6 +121,8 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolde
 
     // 将 var2的数据 显示在ViewHolder 的对应 View 中
     public abstract void convert(ViewHolder var1, T var2);
+    // 将 var2的数据 显示在ViewHolder 的对应 View 中
+    public   void convert(ViewHolder var1, T var2,int position){};
 
     public int getItemCount() {
         return this.mDatas != null?this.mDatas.size():0;
@@ -126,7 +139,7 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolde
                 this.mDatas.clear();
             }
         } else {
-            this.mDatas = list;
+            this.mDatas .addAll(list);
         }
 
         this.notifyDataSetChanged();
@@ -162,5 +175,7 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<ViewHolde
     public T getItem(int position) {
         return position > -1 && null != this.mDatas && this.mDatas.size() > position?this.mDatas.get(position):null;
     }
+
+
 }
 

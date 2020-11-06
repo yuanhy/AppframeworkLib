@@ -123,7 +123,7 @@ public class AndroidOkHttp3 implements Http {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         Interceptor interceptor = new Interceptor() {
             @Override
-            public Response intercept(Interceptor.Chain chain) throws IOException {
+            public Response intercept(Chain chain) throws IOException {
                 Request builder = chain.request().newBuilder()
 //                        .addHeader("token",你的ToKen)
                         .build();
@@ -167,7 +167,7 @@ public class AndroidOkHttp3 implements Http {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         Interceptor interceptor = new Interceptor() {
             @Override
-            public Response intercept(Interceptor.Chain chain) throws IOException {
+            public Response intercept(Chain chain) throws IOException {
                 Request builder = chain.request().newBuilder()
 //                        .addHeader("token",你的ToKen)
                         .build();
@@ -403,7 +403,8 @@ public class AndroidOkHttp3 implements Http {
             public void onResponse(Call call, Response response) throws IOException {
                 boolean isOk = false;
                 InputStream is = null;
-                byte[] buf = new byte[2048];
+//                byte[] buf = new byte[2048];
+                byte[] buf = new byte[20480];
                 int len = 0;
                 FileOutputStream fos = null;
                 // 储存下载文件的目录
@@ -571,7 +572,7 @@ public class AndroidOkHttp3 implements Http {
         Request request = new Request.Builder()
                 .addHeader("RANGE", "bytes=" + startIndex + "-" + contentLength)
                 .url(url).build();
-        String threadId = String.valueOf(Thread.currentThread().getId());
+        final String threadId = String.valueOf(Thread.currentThread().getId());
         mFileClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -634,7 +635,7 @@ public class AndroidOkHttp3 implements Http {
                     isOk = true;
                     progressListener.onProgress(total, sum, dataKey, threadId, isOk);
                     progressListener.onProgress(total, sum, isOk);
-                    AppFramentUtil.logCatUtil.i(TAG, file.getAbsolutePath());
+                    AppFramentUtil.logCatUtil.i(TAG, "下载成功："+file.getAbsolutePath());
                 } catch (Exception e) {
                     e.printStackTrace();
                     SharedPreferencesUtil.getSharedPreferencesUtil(mContext).putLong(dataKey, downSizi);
@@ -652,6 +653,7 @@ public class AndroidOkHttp3 implements Http {
                     } catch (IOException e) {
                     }
                     if (isOk) {
+                        AppFramentUtil.logCatUtil.i(TAG, "下载成功：2"+file.getAbsolutePath());
                         // 下载完成
                         progressListener.onOk(file.getAbsolutePath());
                     } else {
@@ -663,7 +665,7 @@ public class AndroidOkHttp3 implements Http {
     }
 
     @Override
-    public long getContentLength(String url, YCallBack callBack) {
+    public long getContentLength(String url, final YCallBack callBack) {
         Request request = new Request.Builder()
                 .url(url).build();
         mFileClient.newCall(request).enqueue(new Callback() {

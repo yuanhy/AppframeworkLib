@@ -1,4 +1,4 @@
-//package com.yuanhy.library_tools.dbflow.db_enty;
+package com.yuanhy.library_tools.dbflow.db_enty;//package com.yuanhy.library_tools.dbflow.db_enty;
 //
 //import com.raizlabs.android.dbflow.annotation.Column;
 //import com.raizlabs.android.dbflow.annotation.PrimaryKey;

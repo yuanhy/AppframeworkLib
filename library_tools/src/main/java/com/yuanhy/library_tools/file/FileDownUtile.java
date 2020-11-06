@@ -49,7 +49,8 @@ public class FileDownUtile {
         androidOkHttp3.downFile(url, fileDownPath,
                 fileName, progressListener);
     }
-
+    static boolean isOpenApk=false;
+    static RxjavaUtilInterval rxjavaUtilInterval=null;
     /**
      * 断点下载的文件
      *
@@ -59,9 +60,10 @@ public class FileDownUtile {
      * @param fileDownPath     文件的父目录
      * @param progressListener
      */
-    public static void fileDownMultithreadBreakpoint(Context context, String url, String fileDownPath,
-                                                     String fileName, int multithreadnubs, ProgressListener progressListener) {
-
+    public static void fileDownMultithreadBreakpoint(final Context context, final String url, final String fileDownPath,
+                                                     final String fileName, final int multithreadnubs, final ProgressListener progressListener) {
+    isOpenApk=false;
+        rxjavaUtilInterval=null;
         AndroidOkHttp3 androidOkHttp3 = AndroidOkHttp3.getInstance(context);
         androidOkHttp3.initFileClient();
         //获取文件的长度
@@ -73,8 +75,9 @@ public class FileDownUtile {
 
             @Override
             public void onOk(Object o) {
-                HashMap<String, Long> hashMap = new HashMap<>();
-                long contentlength = (long) o;
+
+                final HashMap<String, Long> hashMap = new HashMap<>();
+                final long contentlength = (long) o;
                 long length = (contentlength / multithreadnubs);
                 if (contentlength > 0) {//获取到正确的文件长度
                     for (int i = 0; i < multithreadnubs; i++) {//线程分割
@@ -107,9 +110,9 @@ public class FileDownUtile {
                                         "  需要下载：" + fileSizeBytes + "  已下载：" + remainingBytes +
                                         " 总大小：" + contentlength + " 已下载总：" + lenth + " 总进度：" + progress);
                                 progressListener.onProgress(progress, contentlength);
-                                if (lenth == contentlength) {
-                                    progressListener.onProgress(progress, contentlength, true);
-                                }
+//                                if (lenth == contentlength) {
+//                                    progressListener.onProgress(progress, contentlength, true);
+//                                }
 
                             }
 
@@ -117,6 +120,24 @@ public class FileDownUtile {
                             public void onProgress(Object o, Object o2) {
 
                             }
+
+                            @Override
+                            public void onProgress(long fileSizeBytes, long remainingBytes, boolean done) {
+                                super.onProgress(fileSizeBytes, remainingBytes, done);
+                                AppFramentUtil.logCatUtil.i(  "下载成功3：" +done);
+                                if (done&&!isOpenApk){
+                                    isOpenApk=true;
+                                      rxjavaUtilInterval = new RxjavaUtilInterval(new YCallBack(){
+                                        @Override
+                                        public void requestSuccessful(Object o) {
+                                            rxjavaUtilInterval.cancelDisposable();
+                                            progressListener.onProgress(100, contentlength, true);
+                                        }
+                                    });
+                                  ;rxjavaUtilInterval.interval(3);
+                                }
+                            }
+
 
                         });
                         AppFramentUtil.tasks.postRunnable(fileDownThred);

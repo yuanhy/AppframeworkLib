@@ -1,35 +1,30 @@
 package com.yuanhy.library_tools.activity;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.FloatRange;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.FloatRange;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.ColorUtils;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.yuanhy.library_tools.R;
 import com.yuanhy.library_tools.app.AppAcitivityUtile;
 import com.yuanhy.library_tools.interfaces.ListViewInterface;
-import com.yuanhy.library_tools.util.PermissionUtil;
 import com.yuanhy.library_tools.util.StatusBarUtil;
 
 /**
  * Created by yuanhy on 2018/1/23.
  */
 
-public abstract class BaseActicity2 extends Activity implements View.OnClickListener, ListViewInterface {
+public abstract class BaseActicity2 extends AppCompatActivity implements View.OnClickListener, ListViewInterface {
     public Context context;
     StatusBarUtil statusBarUtil;
     //加载view
@@ -37,15 +32,15 @@ public abstract class BaseActicity2 extends Activity implements View.OnClickList
 	private View titleBarView;
 	public Activity activity;
 	@Override
-    public void onCreate(  Bundle savedInstanceState) {
+    protected void onCreate(  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 取消标题
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		context = this;
 		activity=this;
         statusBarUtil = new StatusBarUtil();
-        setTransparent();
-        setTitleBar();
+//        setTransparent();
+//        setTitleBar();
 
 
 
@@ -83,7 +78,7 @@ public abstract class BaseActicity2 extends Activity implements View.OnClickList
      *
      * 具体使用 ：setTransparent(boolean transparent)
      */
-    public abstract void setTransparent();
+    public   void setTransparent(){}
     boolean transparent = true;
 
 
@@ -100,6 +95,7 @@ public abstract class BaseActicity2 extends Activity implements View.OnClickList
 				RelativeLayout.LayoutParams.MATCH_PARENT, h));// 设置布局);
 		view.setVisibility(View.VISIBLE);
 	}
+
 	/**
 	 *
 	 * @param colco

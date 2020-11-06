@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
-import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +133,6 @@ public class FlowLayoutView extends ViewGroup {
 
 	float mLastY = 0;//记录一次手势滑动的起点
 
-	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (!isScroller) {
@@ -183,7 +181,6 @@ public class FlowLayoutView extends ViewGroup {
 		}
 		return true;
 	}
-	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 	public void fling(int velocityY) {
 		if (getChildCount() > 0) {
 			int height = mumLineHeith;

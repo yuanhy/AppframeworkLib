@@ -1,11 +1,18 @@
 package com.yuanhy.library_tools.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.yuanhy.library_tools.R;
 import com.yuanhy.library_tools.app.AppFramentUtil;
 import com.yuanhy.library_tools.util.LogCatUtil;
@@ -29,7 +36,7 @@ public class GlideUtil {
 
     private GlideUtil() {
         options = new RequestOptions()
-                .placeholder(R.drawable.glidle_loadgif)
+//                .placeholder(R.drawable.glidle_loadgif)
                 .error(R.drawable.icon_errorimg).skipMemoryCache(false)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         optionsUserIco = new RequestOptions()
@@ -60,12 +67,14 @@ public class GlideUtil {
     public void setImageView(Context context, String urlpath, ImageView imageView) {
         Glide.with(context).load(urlpath).apply(options).into(imageView);
     }
+    public void setImageViewBitmap(Context context, Bitmap bitmap, ImageView imageView) {
+        Glide.with(context).load(bitmap).apply(options).into(imageView);
+    }
 
     public void setImageView(Context context, int drawable, ImageView imageView) {
         Glide.with(context).load(context.getResources().getDrawable(drawable)).apply(options).into(imageView);
 
     }
-
     public void setGifImageView(Context context, String urlpath, ImageView imageView) {
         Glide.with(context).asGif().load(urlpath).apply(options).into(imageView);
     }
@@ -105,7 +114,7 @@ public class GlideUtil {
             .load(path)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .skipMemoryCache(false)
-            .placeholder(R.drawable.user_ico)
+            .placeholder(R.drawable.load_img)
             .error(R.drawable.icon_errorimg)
             .transform(transformation)
             .into(imageView);
@@ -218,5 +227,31 @@ public class GlideUtil {
 //                }
 //            }
 //        });
+    }
+
+    public void setGifImageView2(Context context, int drawId, ImageView imageView) {
+
+            RequestOptions      optionsGif = new RequestOptions()
+//                .placeholder(R.drawable.load_img)
+//                    .error(R.drawable.icon_errorimg)
+                    .skipMemoryCache(false)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(context).asGif()   .centerCrop().load(drawId).apply(optionsGif).listener(new RequestListener<GifDrawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+
+                if (resource instanceof GifDrawable) {
+                    //加载一次
+                    ((GifDrawable)resource).setLoopCount(1);
+                }
+                return false;
+            }
+        }).into(imageView );
+
     }
 }

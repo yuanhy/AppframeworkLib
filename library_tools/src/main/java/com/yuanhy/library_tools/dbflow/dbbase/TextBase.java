@@ -1,4 +1,4 @@
-//package com.yuanhy.library_tools.dbflow.dbbase;
+package com.yuanhy.library_tools.dbflow.dbbase;//package com.yuanhy.library_tools.dbflow.dbbase;
 //
 //import com.raizlabs.android.dbflow.annotation.Database;
 //

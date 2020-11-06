@@ -86,10 +86,22 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
 		} else {
 			if (position == 0) {
 				HeaderViewHodle hideViewHodle = null;
-				convertView = LayoutInflater.from(mContext).inflate(headerLayoutId, parent, false);
-				hideViewHodle = new HeaderViewHodle();
-				hideViewHodle.itemView = convertView;
-				convertView.setTag(hideViewHodle);
+				if (convertView == null) {
+					convertView = LayoutInflater.from(mContext).inflate(headerLayoutId, parent, false);
+					hideViewHodle = new HeaderViewHodle();
+					hideViewHodle.itemView = convertView;
+					convertView.setTag(hideViewHodle);
+				} else {
+					Object object = convertView.getTag();
+					if (object instanceof ViewHodle) {
+						convertView = LayoutInflater.from(mContext).inflate(headerLayoutId, parent, false);
+						hideViewHodle = new HeaderViewHodle();
+						hideViewHodle.itemView = convertView;
+						convertView.setTag(hideViewHodle);
+					} else if (object instanceof HeaderViewHodle) {
+						hideViewHodle = (HeaderViewHodle) object;
+					}
+				}
 				convertHideView(hideViewHodle, null, 0);
 				return convertView;
 			} else {

@@ -11,13 +11,13 @@ import android.graphics.Xfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
-import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * 圆角图片
  */
-public class RoundImageView extends AppCompatImageView {
+public class RoundImageView extends ImageView {
 
 	private Paint mPaint;
 	private Xfermode mXfermode;

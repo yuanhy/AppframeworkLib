@@ -11,4 +11,6 @@ public class YCallBack {
     public   void onOk(Object o){};
     public   void onError(Object o){};
     public void onProgress(Object o){};
+    public void  onParameter(Object... objects){}
+    public   void sendMessge(String sendkey){};
 }

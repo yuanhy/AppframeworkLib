@@ -3,20 +3,21 @@ package com.yuanhy.library_tools.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.yuanhy.library_tools.interfaces.ListViewInterface;
 import com.yuanhy.library_tools.popwindows.LoadPopupWindow;
 import com.yuanhy.library_tools.popwindows.ToastPopWindow;
+import com.yuanhy.library_tools.util.TimeUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BaseFragment extends Fragment   implements ListViewInterface {
+public class BaseFragment extends Fragment implements ListViewInterface , View.OnClickListener {
 	private Unbinder mUnbinder;
 	public Context context;
 	public LoadPopupWindow loadPopupWindow;
@@ -50,7 +51,14 @@ public class BaseFragment extends Fragment   implements ListViewInterface {
 		this.context = context;
 		super.onAttach(context);
 	}
-
+	public Activity getFragmentActivity(){
+		if (getActivity()==null){
+			return (Activity) context
+					;
+		}else {
+			return  getActivity();
+		}
+	}
 	@Override
 	public void onDestroy() {
 		if (mUnbinder != Unbinder.EMPTY) {
@@ -67,6 +75,19 @@ public class BaseFragment extends Fragment   implements ListViewInterface {
 
 	@Override
 	public void loadMoveData() {
+
+	}
+
+	/**
+	 * Called when a view has been clicked.
+	 *
+	 * @param v The view that was clicked.
+	 */
+	@Override
+	public void onClick(View v) {
+		if (!TimeUtil.invalidTime(2000)){
+			return;
+		}
 
 	}
 }

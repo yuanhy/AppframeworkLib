@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 def dbflow_version = "4.2.4"
 android {
-    compileSdkVersion 29
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion 16
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 //        multiDexEnabled true
@@ -26,22 +26,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
+  //  compileOptions {
+  //      sourceCompatibility = '1.8'
+  //      targetCompatibility = '1.8'
+  //  }
 
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:support-annotations:28.0.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -58,18 +62,21 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
 
     //fastJson 框架
-    implementation 'com.alibaba:fastjson:1.1.70.android'
-//    //noinspection GradleCompatible
+    implementation 'com.alibaba:fastjson:1.2.62'
+
+    //noinspection GradleCompatible
 //    implementation 'com.android.support:recyclerview-v7:28.0.0'
 /**
  * webView
  */
-    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+    api 'com.github.lzyzsd:jsbridge:1.0.4'
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta15'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta05'
 
-//    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$dbflow_version"
-//    implementation "com.github.Raizlabs.DBFlow:dbflow-core:$dbflow_version"
-//    implementation "com.github.Raizlabs.DBFlow:dbflow:$dbflow_version"
-
+    //noinspection GradleCompatible
+    implementation "com.android.support:recyclerview-v7:25.4.0"
+    /*添加依赖*/
+    api 'com.github.yuzhiqiang1993:zxing:2.2.8'
+    api "org.java-websocket:Java-WebSocket:1.4.1"
+    //implementation project(path: ':reslibrary')
+  //  api project(path: ':layoutmanager')
 }

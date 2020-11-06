@@ -123,7 +123,11 @@ public class SharedPreferencesUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences(appSavaData, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, false);
     }
-
+    public boolean getBoolean(String key,boolean defValue) {
+        //获取sharedPreferences对象
+        SharedPreferences sharedPreferences = context.getSharedPreferences(appSavaData, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, defValue);
+    }
     public void putAppUpDataString(String v) {
         //获取sharedPreferences对象
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppUpData, Context.MODE_PRIVATE);
